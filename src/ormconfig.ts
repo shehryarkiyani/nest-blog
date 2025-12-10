@@ -7,5 +7,7 @@ const config: PostgresConnectionOptions = {
   password: 'postgres',
   database: 'blog',
   logging: true,
+  entities: [__dirname + '/**/*.entity.{ts,js}'],
+  synchronize: true, //typeorm will auto create or update your db based on your entities each time when you run application. Don't use in production
 };
 export default config;
