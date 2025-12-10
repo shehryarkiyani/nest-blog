@@ -1,3 +1,4 @@
+import { DataSource } from 'typeorm';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions.js';
 const config: PostgresConnectionOptions = {
   type: 'postgres',
@@ -8,6 +9,10 @@ const config: PostgresConnectionOptions = {
   database: 'blog',
   logging: true,
   entities: [__dirname + '/**/*.entity.{ts,js}'],
-  synchronize: true, //typeorm will auto create or update your db based on your entities each time when you run application. Don't use in production
+  migrationsTableName: 'migration',
+  migrations: [__dirname + '/migrations/**/*.ts'],
 };
+const AppDataSource = new DataSource(config);
+
+export { AppDataSource };
 export default config;
